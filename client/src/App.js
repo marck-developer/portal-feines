@@ -1,6 +1,14 @@
+import Landing from "./pages/Landing"
+import styled from 'styled-components'
 
 function App() {
-  return <h1>Portal Feines</h1>
+  return (
+    <div>
+    <h1>Portal Feines</h1>
+    <Landing />
+    </div>
+  )
 }
 
-export default App;
+export default App
+
