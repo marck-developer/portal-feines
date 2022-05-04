@@ -1,14 +1,19 @@
-import Landing from "./pages/Landing"
-import styled from 'styled-components'
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import {Dashboard, Landing, Register, Error} from './pages'
 
 function App() {
   return (
-    <div>
-    <h1>Portal Feines</h1>
-    <Landing />
-    </div>
+    <BrowserRouter>
+    <Routes>
+      <Route path='/' element={<Dashboard />} />
+      <Route path='/register' element={<Register />} />
+      <Route path='/landing' element={<Landing />} />
+      <Route path='*' element={<Error />}/>
+    </Routes>
+</BrowserRouter>
   )
 }
 
 export default App
+
 
