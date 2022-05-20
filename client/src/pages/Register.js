@@ -5,9 +5,9 @@ import Wrapper from '../assets/wrappers/RegisterPage'
 import { useAppContext } from '../context/appContext'
 
 const initialState = {
-    name: '',
-    email: '',
-    password: '',
+    nom: '',
+    correu: '',
+    contrasenya: '',
     isMember: true,   
 }
 // if possible prefer local state
@@ -18,19 +18,25 @@ const Register = () => {
     const [values, setValues] = useState(initialState)
 
   // global context and useNavigate later
-    const { isLoading, showAlert } = useAppContext()
+    const { isLoading, showAlert, displayAlert } = useAppContext()
 
     const toggleMember = () => {
     setValues({ ...values, isMember: !values.isMember })
     }
 
     const handleChange = (e) => {
-    console.log(e.target)
+        setValues({ ...values, [e.target.name]: e.target.value
+        })
     }
 
     const onSubmit = (e) => {
-    e.preventDefault()
-    console.log(e.target)
+        e.preventDefault()
+        const { nom, correu, contrasenya, isMember } = values
+        if (!correu || !contrasenya || (!isMember && !nom)) {
+            displayAlert()
+        return
+        }
+        console.log(values)
     }
 
     return (
@@ -43,23 +49,24 @@ const Register = () => {
         {/* name field */}
         {!values.isMember && (<FormRow 
         type='text'
-        name='usuari'
-        value={values.name}
+        name='nom'
+        value={values.nom}
         handleChange={handleChange}
         />
         )}
         {/* email field */}
         <FormRow 
         type='email'
-        name='correu electrònic'
-        value={values.email}
+        name='correu' 
+        labelText='correu electrònic'   
+        value={values.correu}
         handleChange={handleChange}
         />
-        {/* password field */}
+        {/* contrasenya field */}
         <FormRow 
         type='password'
         name='contrasenya'
-        value={values.password}
+        value={values.contrasenya}
         handleChange={handleChange}
         />
         <button type='submit' className='btn btn-block'>
